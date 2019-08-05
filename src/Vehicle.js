@@ -1,4 +1,6 @@
 import React from 'react';
+import busImage from "./mode-bus.png";
+import maxImage from "./mode-max.png";
 
 export class Vehicle extends React.Component {
 
@@ -27,23 +29,36 @@ export class Vehicle extends React.Component {
     }
 
     if (item.type == "rail") {
-      return(
-        <div key={item.tripID} class="vehicle train">
-          <div>{getTrainName(item.routeNumber)}</div>
-          <div>{item.signMessageLong}</div>
-          <div>{item.latitude}/{item.longitude}</div>
-          <div>delay: {item.delay}</div>
+      return (
+        <div
+          key={item.tripID}
+          class="vehicle train"
+          data-max-line={getTrainName(item.routeNumber)}
+        >
+          <img src={maxImage} />
+          <div class="route-title">{item.signMessageLong}</div>
+          <div class="additional-content">
+            <div>
+              {item.latitude}/{item.longitude}
+            </div>
+            <div>delay: {item.delay}</div>
+          </div>
         </div>
-      )
+      );
     } else {
-      return(
+      return (
         <div key={item.tripID} class="vehicle bus">
+          <img src={busImage} />
           <div>Bus {item.routeNumber}</div>
-          <div>{item.signMessageLong}</div>
-          <div>{item.latitude}/{item.longitude}</div>
-          <div>delay: {item.delay}</div>
+          <div class="route-title">{item.signMessageLong}</div>
+          <div class="additional-content">
+            <div>
+              {item.latitude}/{item.longitude}
+            </div>
+            <div>delay: {item.delay}</div>
+          </div>
         </div>
-      )
+      );
     }
   }
 }
@@ -51,7 +66,7 @@ export class Vehicle extends React.Component {
 export default Vehicle;
 
 
-// all data variables:
+// all variables:
 
 // <div>expires: {item.expires}</div>
 // <div>signMessage: {item.signMessage}</div>
