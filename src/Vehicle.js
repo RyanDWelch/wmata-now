@@ -1,55 +1,67 @@
-import React from 'react';
+import React from "react";
+import busImage from "./mode-bus.png";
+import maxImage from "./mode-max.png";
 
 export class Vehicle extends React.Component {
-
   render() {
-
     var item = this.props.data;
 
     function getTrainName(num) {
       switch (num) {
         case 90:
-          return 'Red'
+          return "red";
           break;
         case 100:
-          return 'Blue'
+          return "blue";
           break;
         case 200:
-          return 'Green'
+          return "green";
           break;
         case 190:
-          return 'Yellow'
+          return "yellow";
           break;
         case 290:
-          return 'Orange'
+          return "orange";
           break;
       }
     }
 
     if (item.type == "rail") {
-      return(
-        <div key={item.tripID} class="vehicle train">
-          <div>{getTrainName(item.routeNumber)}</div>
-          <div>{item.signMessageLong}</div>
-          <div>{item.latitude}/{item.longitude}</div>
-          <div>delay: {item.delay}</div>
+      return (
+        <div
+          key={item.tripID}
+          class="vehicle train"
+          data-max-line={getTrainName(item.routeNumber)}
+        >
+          <img src={maxImage} />
+          <div class="route-title">{item.signMessageLong}</div>
+          <div class="additional-content">
+            <div>
+              {item.latitude}/{item.longitude}
+            </div>
+            <div>delay: {item.delay}</div>
+          </div>
         </div>
-      )
+      );
     } else {
-      return(
+      return (
         <div key={item.tripID} class="vehicle bus">
+          <img src={busImage} />
           <div>Bus {item.routeNumber}</div>
-          <div>{item.signMessageLong}</div>
-          <div>{item.latitude}/{item.longitude}</div>
-          <div>delay: {item.delay}</div>
+          <div class="route-title">{item.signMessageLong}</div>
+          <div class="additional-content">
+            <div>
+              {item.latitude}/{item.longitude}
+            </div>
+            <div>delay: {item.delay}</div>
+          </div>
         </div>
-      )
+      );
     }
   }
 }
 
 export default Vehicle;
-
 
 // all data variables:
 

@@ -1,4 +1,3 @@
-
 .App {
   text-align: center;
 }
@@ -36,22 +35,37 @@
 .container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .vehicle {
   flex-basis: 10%;
-  border: 1px solid black;
-  margin: 5px;
-  flex-grow: 1;
+  max-width: 10%;
+  margin: 2px;
   padding: 10px;
   text-align: center;
 }
 
+.route-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bus .route-title {
+  color: #084c8d;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.vehicle img {
+  width: 75%;
+}
 
 .vehicle.train {
-  background-color: lightblue;
+  background-color: #084c8d;
 }
 
 .vehicle.bus {
-  background-color: green;
+  background-color: #fcd672;
 }
