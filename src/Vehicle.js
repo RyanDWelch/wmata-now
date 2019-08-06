@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import busImage from "./mode-bus.png";
 import maxImage from "./mode-max.png";
 
@@ -54,7 +54,7 @@ export class Vehicle extends React.Component {
           <img src={maxImage} />
           <div class="route-title">{item.signMessageLong}</div>
           <div class="additional-content">
-            <div class="delay">{delayTime['delay']} {delayTime['min']} minutes and {delayTime['sec']} seconds</div>
+          <div class="delay">{delayTime['delay']} {delayTime['min']} minutes and {delayTime['sec']} seconds</div>
           </div>
         </div>
       );
@@ -78,7 +78,9 @@ export class Vehicle extends React.Component {
 
 export default Vehicle;
 
-// all data variables:
+
+// all variables:
+
 // <div>expires: {item.expires}</div>
 // <div>signMessage: {item.signMessage}</div>
 // <div>serviceDate: {item.serviceDate}</div>
