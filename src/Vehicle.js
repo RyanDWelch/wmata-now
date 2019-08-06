@@ -2,29 +2,47 @@ import React from "react";
 import busImage from "./mode-bus.png";
 import maxImage from "./mode-max.png";
 
+function getDelayTime(time){
+  let delay;
+  if (time > 0) {
+    delay = "Ahead of schedule";
+  } else if (time == 0) {
+    delay = "On schedule";
+  } else if (time < 0) {
+    delay = "Behind schedule"
+  }
+
+  let minutes = Math.floor(time / 60);
+  let seconds = time - minutes * 60;
+  minutes = Math.abs(minutes)
+  return {delay:delay,min:minutes,sec:seconds}
+}
+
+function getTrainName(num) {
+  switch (num) {
+    case 90:
+      return "red";
+      break;
+    case 100:
+      return "blue";
+      break;
+    case 200:
+      return "green";
+      break;
+    case 190:
+      return "yellow";
+      break;
+    case 290:
+      return "orange";
+      break;
+  }
+}
+
 export class Vehicle extends React.Component {
   render() {
     var item = this.props.data;
 
-    function getTrainName(num) {
-      switch (num) {
-        case 90:
-          return "red";
-          break;
-        case 100:
-          return "blue";
-          break;
-        case 200:
-          return "green";
-          break;
-        case 190:
-          return "yellow";
-          break;
-        case 290:
-          return "orange";
-          break;
-      }
-    }
+    let delayTime = getDelayTime(item.delay);
 
     if (item.type == "rail") {
       return (
@@ -36,10 +54,7 @@ export class Vehicle extends React.Component {
           <img src={maxImage} />
           <div class="route-title">{item.signMessageLong}</div>
           <div class="additional-content">
-            <div>
-              {item.latitude}/{item.longitude}
-            </div>
-            <div>delay: {item.delay}</div>
+            <div class="delay">{delayTime['delay']} {delayTime['min']} minutes and {delayTime['sec']} seconds</div>
           </div>
         </div>
       );
@@ -53,7 +68,7 @@ export class Vehicle extends React.Component {
             <div>
               {item.latitude}/{item.longitude}
             </div>
-            <div>delay: {item.delay}</div>
+            <div class="delay">{delayTime['delay']} {delayTime['min']} minutes and {delayTime['sec']} seconds</div>
           </div>
         </div>
       );
@@ -64,7 +79,6 @@ export class Vehicle extends React.Component {
 export default Vehicle;
 
 // all data variables:
-
 // <div>expires: {item.expires}</div>
 // <div>signMessage: {item.signMessage}</div>
 // <div>serviceDate: {item.serviceDate}</div>
