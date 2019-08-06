@@ -65,9 +65,6 @@ export class Vehicle extends React.Component {
           <div>Bus {item.routeNumber}</div>
           <div class="route-title">{item.signMessageLong}</div>
           <div class="additional-content">
-            <div>
-              {item.latitude}/{item.longitude}
-            </div>
             <div class="delay">{delayTime['delay']} {delayTime['min']} minutes and {delayTime['sec']} seconds</div>
           </div>
         </div>

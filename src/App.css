@@ -69,12 +69,15 @@
   font-weight: 600;
 }
 
+<<<<<<< HEAD
+=======
 .route-title {
   color: white;
   font-size: 16px;
   font-weight: 600;
 }
 
+>>>>>>> 664cac0375575ff1cee7b3778819a0b9217846e7
 .bus .route-title {
   color: #084c8d;
   font-size: 16px;
