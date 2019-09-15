@@ -37,21 +37,30 @@
 }
 
 .container {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  padding: 1px; */
+  height: 100vh;
+  width: 100%;
 }
 
-.vehicle {
+/* .vehicle {
   flex-basis: 10%;
   max-width: 10%;
+  flex-grow: 1;
   margin: 2px;
   padding: 10px;
-  border: 1px solid black;
-  border-bottom: none;
+  border: 1px solid white;
   text-align: center;
   position: relative;
-  min-height: 230px;
+  min-height: 200px;
+}
+
+@media(min-width: 1400px){
+  .vehicle {
+    flex-basis: 5%;
+    max-width: 5%;
+  }
 }
 
 .vehicle .delay {
@@ -63,21 +72,22 @@
   color: white;
 }
 
+.vehicle .additional-content {
+  display: none;
+}
+
 .route-title {
   color: white;
   font-size: 16px;
   font-weight: 600;
 }
 
-<<<<<<< HEAD
-=======
 .route-title {
   color: white;
   font-size: 16px;
   font-weight: 600;
 }
 
->>>>>>> 664cac0375575ff1cee7b3778819a0b9217846e7
 .bus .route-title {
   color: #084c8d;
   font-size: 16px;
@@ -85,13 +95,65 @@
 }
 
 .vehicle img {
-  width: 75%;
-}
+  max-width: 100px;
+} */
 
-.vehicle.train {
+
+.vehicle.rail {
   background-color: #084c8d;
+  background-image: url('images/mode-max.png');
 }
 
 .vehicle.bus {
   background-color: #fcd672;
+  background-image: url('images/mode-bus.png');
+}
+
+.navigation {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 1;
+}
+
+.navigation ul {
+  list-style: none;
+}
+
+.vehicle-infobox {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 100%;
+  background-color: white;
+  padding: 1rem;
+}
+
+.vehicle-infobox div {
+  white-space: nowrap
+}
+
+.vehicle-infobox div div {
+  font-weight: bold;
+  display: inline-block;
+}
+
+.vehicle:hover .vehicle-infobox {
+  display: block;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+}
+
+.stats > div {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 28px;
+}
+
+.stats > div > div {
+  font-weight: bold;
+  font-size: 16px;
 }
