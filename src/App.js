@@ -48,7 +48,7 @@ export class App extends React.Component {
     let { isLoaded, vehicles } = this.state;
 
     if (!isLoaded) {
-      return <div>Loading...</div>;
+      return <div className="loading">loading<span>.</span><span>.</span><span>.</span></div>;
     } else {
       return (
         <div className="container">
