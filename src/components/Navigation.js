@@ -1,23 +1,19 @@
 import React, {Component} from 'react';
 
 
-export class Navigation extends Component {
-    constructor(props) {
-      super(props);
-    }
+export const Navigation = props =>  {
   
-    render() {
         return (
             <div className={"navigation"}>
                 <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li><label>Busses</label><input type="checkbox"></input></li>
+                    <li><label>Trains</label><input type="checkbox"></input></li>
+                    <li><label>All</label><input type="checkbox"></input></li>
+                    <li><button>Update Data</button></li>
                 </ul>
             </div>
         );
-      }
+
   }
   
   export default Navigation;

@@ -28,6 +28,7 @@ const Wrapper = styled.div`
 const Marker = props => (
   <Wrapper
     alt={props.text}
+    key={props.vehicleID}
     className={props.type + " vehicle"}
     {...props.onClick ? { onClick: props.onClick } : {}}
   >

@@ -6,6 +6,7 @@ import Navigation from './components/Navigation';
 import Stats from './components/Stats';
 
 import "./App.css";
+import { get } from "http";
 
 // Return map bounds based on list of places
 const getMapBounds = (map, maps, places) => {
@@ -49,19 +50,24 @@ export class App extends React.Component {
     };
   }
 
-  componentDidMount() {
+  getData() {
     fetch(
       "https://developer.trimet.org/ws/v2/vehicles/appID/CC57D2038B76DBBD253D6A587"
     )
       .then(res => res.json())
       .then(json => {
-        // filter out a bunch of vehicles
-        // const filteredVehicles = json.resultSet.vehicle.filter(vehicle => vehicle.vehicleID < 3000);
+        // filter out busses
+        const filteredVehicles = json.resultSet.vehicle.filter(vehicle => vehicle.type == 'rail');
         this.setState({
           isLoaded: true,
-          items: json.resultSet.vehicle
+          items: filteredVehicles
         });
       });
+      console.log('got data');
+  }
+
+  componentDidMount() {
+    this.getData();
   }
 
   render() {
@@ -89,7 +95,8 @@ export class App extends React.Component {
               />
             ))}
           </GoogleMap>
-          <Navigation/>
+          <Navigation />
+          <button onClick={() => this.getData}>UPDATE DATA</button>
           <Stats
             data={items}
           />
