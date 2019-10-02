@@ -2,43 +2,15 @@ import React from "react";
 import GoogleMap from './components/GoogleMap';
 
 import Marker from './components/Marker';
-import Navigation from './components/Navigation';
 import Stats from './components/Stats';
-
+import { apiIsLoaded } from './components/Functions';
 import "./App.css";
-import { get } from "http";
+import { mapStyles } from './mapstyles.js';
+// import { mapStyles } from './mapstyles-bw.js';
 
-// Return map bounds based on list of places
-const getMapBounds = (map, maps, places) => {
-  const bounds = new maps.LatLngBounds();
-
-  places.forEach((place) => {
-    bounds.extend(new maps.LatLng(
-      place.latitude,
-      place.longitude,
-    ));
-  });
-  return bounds;
-};
-
-// Re-center map when resizing the window
-const bindResizeListener = (map, maps, bounds) => {
-  maps.event.addDomListenerOnce(map, 'idle', () => {
-    maps.event.addDomListener(window, 'resize', () => {
-      map.fitBounds(bounds);
-    });
-  });
-};
-
-// Fit map to its bounds after the api is loaded
-const apiIsLoaded = (map, maps, places) => {
-  // Get bounds by our places
-  const bounds = getMapBounds(map, maps, places);
-  // Fit map to bounds
-  map.fitBounds(bounds);
-  // Bind the resize listener
-  bindResizeListener(map, maps, bounds);
-};
+const API_KEY = "CC57D2038B76DBBD253D6A587";
+const API_URL = "https://developer.trimet.org/ws/v2/vehicles/appID/"+API_KEY;
+const defaultCenter = [45.519526,-122.677040];
 
 
 export class App extends React.Component {
@@ -46,32 +18,34 @@ export class App extends React.Component {
     super(props);
     this.state = {
       isLoaded: false,
-      items: []
+      vehicles: []
     };
   }
 
-  getData() {
-    fetch(
-      "https://developer.trimet.org/ws/v2/vehicles/appID/CC57D2038B76DBBD253D6A587"
-    )
-      .then(res => res.json())
-      .then(json => {
-        // filter out busses
-        const filteredVehicles = json.resultSet.vehicle.filter(vehicle => vehicle.type == 'rail');
-        this.setState({
-          isLoaded: true,
-          items: filteredVehicles
-        });
-      });
-      console.log('got data');
-  }
+  async componentDidMount() {
+    let totalRequests = 0;
+    try {
+      setInterval(async () => {
+        if (totalRequests < 10) {
+          const res = await fetch(API_URL);
+          const json = await res.json();
+          // const filteredVehicles = json.resultSet.vehicle.filter(vehicle => vehicle.type === 'rail');
+          const vehicles = json.resultSet.vehicle;
 
-  componentDidMount() {
-    this.getData();
+          this.setState({
+            isLoaded: true,
+            vehicles: vehicles
+          })
+          totalRequests++;
+        }
+      }, 10000);
+    } catch(e) {
+      console.error(e);
+    }
   }
 
   render() {
-    var { isLoaded, items } = this.state;
+    let { isLoaded, vehicles } = this.state;
 
     if (!isLoaded) {
       return <div>Loading...</div>;
@@ -80,26 +54,25 @@ export class App extends React.Component {
         <div className="container">
           <GoogleMap
             defaultZoom={12}
-            defaultCenter={[45.519526,-122.677040]}
+            defaultCenter={defaultCenter}
+            options={{
+              styles: mapStyles
+            }}
             yesIWantToUseGoogleMapApiInternals
-            onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps, items)}
+            onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps, vehicles)}
             >
-            {items.map(item => (
+            {vehicles.map(vehicle => (
               <Marker 
-              key={item.vehicleID}
-              text={item.signMessageLong}
-              type={item.type}
-              lat={item.latitude}
-              lng={item.longitude}
-              data={item}
+              key={vehicle.vehicleID}
+              text={vehicle.signMessageLong}
+              type={vehicle.type}
+              lat={vehicle.latitude}
+              lng={vehicle.longitude}
+              data={vehicle}
               />
             ))}
           </GoogleMap>
-          <Navigation />
-          <button onClick={() => this.getData}>UPDATE DATA</button>
-          <Stats
-            data={items}
-          />
+          <Stats data={vehicles} />
         </div>
       );
     }

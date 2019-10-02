@@ -1,103 +1,11 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 * {
   box-sizing: border-box;
 }
 
 .container {
-  /* display: flex;
-  flex-wrap: wrap;
-  padding: 1px; */
   height: 100vh;
   width: 100%;
 }
-
-/* .vehicle {
-  flex-basis: 10%;
-  max-width: 10%;
-  flex-grow: 1;
-  margin: 2px;
-  padding: 10px;
-  border: 1px solid white;
-  text-align: center;
-  position: relative;
-  min-height: 200px;
-}
-
-@media(min-width: 1400px){
-  .vehicle {
-    flex-basis: 5%;
-    max-width: 5%;
-  }
-}
-
-.vehicle .delay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0px 3px 5px;
-  color: white;
-}
-
-.vehicle .additional-content {
-  display: none;
-}
-
-.route-title {
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.route-title {
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.bus .route-title {
-  color: #084c8d;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.vehicle img {
-  max-width: 100px;
-} */
-
 
 .vehicle.rail {
   background-color: #084c8d;
@@ -110,6 +18,7 @@
 }
 
 .navigation {
+  display: none;
   position: fixed;
   top: 30px;
   left: 30px;
@@ -134,9 +43,8 @@
   white-space: nowrap
 }
 
-.vehicle-infobox div div {
+.vehicle-infobox {
   font-weight: bold;
-  display: inline-block;
 }
 
 .vehicle:hover .vehicle-infobox {
@@ -157,4 +65,5 @@
 .stats > div > div {
   font-weight: bold;
   font-size: 16px;
+  transition: 2s ease-in-out;
 }

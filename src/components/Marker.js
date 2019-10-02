@@ -33,9 +33,7 @@ const Marker = props => (
     {...props.onClick ? { onClick: props.onClick } : {}}
   >
     <div className="vehicle-infobox">
-      {Object.keys(props.data).map(function(keyName) {
-        return <div className={`vehicle-${keyName}`}><div>{`${keyName}: `}</div>{` ${props.data[keyName]}`}</div>;
-      })}
+      <div>{props.data.signMessageLong}</div>
     </div>
   </Wrapper>
 );
