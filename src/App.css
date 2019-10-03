@@ -12,14 +12,39 @@ html, body, #root {
 }
 
 .vehicle.rail {
-  background-color: #084c8d;
-  background-image: url('images/mode-max.png');
+  /* background-color: #084c8d; */
+  /* background-image: url('images/mode-max.png'); */
+}
+
+.vehicle.rail100 {
+  background-color: #0069aa;
+}
+
+.vehicle.rail90 {
+  background-color: #d11241;
+}
+
+.vehicle.rail200 {
+  background-color: #008752;
+}
+
+.vehicle.rail190 {
+  background-color: #ffc424;
+}
+
+.vehicle.rail290 {
+  background-color: orange;
 }
 
 .vehicle.bus {
   background-color: #fcd672;
-  background-image: url('images/mode-bus.png');
-}
+  /* background-image: url('images/mode-bus.png'); */
+  /* background-image: url('images/mode-bus.png'), linear-gradient(45deg, rgb(252, 214, 114) 0%,rgb(252, 214, 114) 49%, rgb(8, 76, 141) 49%, rgb(8, 76, 141) 100%); */
+  border: 1px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
 
 .navigation {
   display: none;
@@ -53,6 +78,14 @@ html, body, #root {
 
 .vehicle:hover .vehicle-infobox {
   display: block;
+}
+
+.vehicle .routeNumber {
+  font-weight: bold;
+}
+
+.vehicle.rail .routeNumber {
+  display: none;
 }
 
 .stats {

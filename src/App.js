@@ -48,7 +48,7 @@ export class App extends React.Component {
     let { isLoaded, vehicles } = this.state;
 
     if (!isLoaded) {
-      return <div className="loading">loading<span>.</span><span>.</span><span>.</span></div>;
+      return <div className="loading">Loading<span>.</span><span>.</span><span>.</span></div>;
     } else {
       return (
         <div className="container">
@@ -59,6 +59,7 @@ export class App extends React.Component {
               styles: mapStyles
             }}
             yesIWantToUseGoogleMapApiInternals
+            disableDefaultUI
             onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps, vehicles)}
             >
             {vehicles.map(vehicle => (
