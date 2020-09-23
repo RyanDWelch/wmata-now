@@ -23,7 +23,7 @@ export class App extends React.Component {
 componentDidMount() {
     fetch(API_URL, {
         headers: new Headers({
-          "api_key": "e13626d03d8e4c03ac07f95541b3091b"
+          "api_key": process.env.REACT_APP_WAMATA_API_KEY
         })
       })
       .then(response => response.json())
